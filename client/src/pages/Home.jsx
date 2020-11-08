@@ -25,8 +25,8 @@ export default () => {
                         ))}
                         <
                     </Row> */}
-                    <Card className="flex-fill ">
-                        <CardImg src="../..//product-placeholder.jpg" className="product-img p-2 pb-0" />
+                    <Card className="flex-fill">
+                        <CardImg src="../../flask-backend/plot.png" className="product-img p-2 pb-0" />
                         <CardBody className="d-flex flex-column justify-content-between">
                             <div className="product-title">{content.title}</div>
                         </CardBody>
