@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 
 ############################################################################### 
 #############################   CONFIGURATION   ###############################
@@ -145,6 +146,16 @@ def execute_episode():
 
 ############################################################################### 
 
+############################################################################### 
+#######################   FINAL IRRIGATION AMOUNTS   ########################## 
+###############################################################################
+def find_amounts():
+    final_actions = []
+    for i in range(len(Q)-1): 
+        final_actions.append(ACTIONS[np.argmax(Q[i])])
+    
+    return final_actions
+
 if __name__ == "__main__":
     reset_Q()
     print_Q()
@@ -154,3 +165,8 @@ if __name__ == "__main__":
 
     print_Q()
     # print(ET)
+
+    plt.plot(TSW)
+    final_actions = find_amounts()
+    plt.plot(final_actions)
+    plt.show()
