@@ -1,14 +1,16 @@
 import numpy as np
 import random
+import json
+import matplotlib.pyplot as plt
 
 ############################################################################### 
 #############################   CONFIGURATION   ###############################
 ###############################################################################
 # Given data
-from ml.generate import final as TSW
-from ml.generate import evaporation as ET
-from ml.generate import rain as R
-from ml.generate import n, PredictYield
+# from generate import final as TSW
+# from generate import evaporation as ET
+# from generate import rain as R
+# from generate import n
 
 # PRICES
 WATER_PRICE = 100
@@ -42,6 +44,14 @@ def simulate(i, a):
     # TSW[i+1] = predTSW(TSW[i], I_i, ET[i], R[i])
     # return TSW[i+1]
 
+def PredictYield(TSW):
+    total_sum = sum(TSW)
+    if total_sum < 600:
+        return total_sum*10
+    elif total_sum < 700:
+        return 7000
+    else:
+        return 6000
 ############################################################################### 
 
 
@@ -115,7 +125,7 @@ def reward(i):
 ############################################################################### 
 def execute_episode():
     # reset the value of TSW
-    from ml.generate import final as TSW
+    from generate import final as TSW
     
     # SET s and a for the first time
     s = 0
@@ -149,10 +159,24 @@ def execute_episode():
 #######################   FINAL IRRIGATION AMOUNTS   ########################## 
 ###############################################################################
 def find_amounts():
-    reset_Q()
+    with open('sample1.json') as f:
+        value_dict = json.load(f)
+
+        global TSW
+        global ET
+        global R
+        global n
+
+        TSW = value_dict['TSW']
+        ET = value_dict['ET']
+        R = value_dict['R']
+        n = value_dict['n']
+
+    reset_Q()    
     for _ in range(100):
         execute_episode()
-
+    
+    
     final_actions = []
     for i in range(len(Q)-1): 
         final_actions.append(ACTIONS[np.argmax(Q[i])])
