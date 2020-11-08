@@ -33,7 +33,7 @@ def chat():
 
     if response["intent"] == "action_2395_intent_16387":
         rain(data)
-    else if response["intent"] == "action_11127_intent_1760":
+    elif response["intent"] == "action_11127_intent_1760":
         tsw(data)
     else:
         plan(final_amounts(data))

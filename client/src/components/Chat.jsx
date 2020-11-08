@@ -48,7 +48,7 @@ export default ({ setContent, setLoading }) => {
                     { id: newHistory.length + 1, type: "in", content: res.data.text },
                 ]);
             }
-            setContent(res.data);
+            // setContent(res.data);
             
             setTyping(false);
             setLoading(false);
