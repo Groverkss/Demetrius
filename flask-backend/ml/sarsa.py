@@ -182,3 +182,6 @@ def find_amounts():
         final_actions.append(ACTIONS[np.argmax(Q[i])])
     
     return final_actions
+
+if __name__ == "__main__":
+    print(find_amounts())

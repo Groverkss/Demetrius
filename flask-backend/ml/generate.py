@@ -1,5 +1,5 @@
 import random
-
+import json
 n = 80
 
 rain = [0]*n
@@ -24,6 +24,16 @@ for i,j in zip(rain, mois):
     init = init/evap
     final.append(round(init,3))
     evaporation.append(round(evap,3))
+
+with open('sample1.json', 'w') as f:
+    final_dict = {
+        'TSW': final,
+        'ET': evaporation,
+        'R': rain,
+        'n': n
+    }
+    
+    json.dump(final_dict, f)
 
 # print(final)
 # print(evaporation)
