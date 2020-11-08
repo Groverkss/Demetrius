@@ -1,6 +1,6 @@
 # Demetrius
 
-**Demetrius** is a solution to leverage Reinforcement Learning to optimize the process of irrigation, which leads to higher profits and conservation of freshwater resources. It uses site-specific data to vary the amount of irrigation per day, a vastly unexplored field made possible due to progress of IOT Devices in Agritecg. 
+**Demetrius** is a solution leveraging Reinforcement Learning to optimize the process of irrigation, which leads to higher profits and conservation of freshwater resources. It uses site-specific data to vary the amount of irrigation per day, a vastly unexplored field made possible due to progress of IOT Devices in Agritech. 
 
 - Checkout [this video](https://todo) for a working demo. 
 
@@ -47,7 +47,8 @@ Our chatbot application is intended to be used as a resource organizer, and for 
 
 ### Reinforcement Learning
 
-TODO
+Since there is no clear answer on how much irrigation is to be done for each day, we turn to Reinforcement Learning Algorithms for a idea. More specifically, we use the SARSA Algorithm, which not only learns the real world factors playing at hand, but also learns from its errors; each and every day
+it gets better! We convert each day into a datapoint, and the amount of irrigation to be done as an action. This then helps us figuring the Q-table day by day as it learns the environment better. At the end of the day, we output what amount is to be irrigated the next day.
 
 ### Application
 
