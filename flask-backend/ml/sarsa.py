@@ -184,4 +184,6 @@ def find_amounts():
     return final_actions
 
 if __name__ == "__main__":
-    print(find_amounts())
+    final_actions = {'irrigation':find_amounts()}
+    with open('sarsa1.json', 'w') as f:
+        json.dump(final_actions, f)
