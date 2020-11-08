@@ -1,15 +1,14 @@
 import numpy as np
 import random
-import matplotlib.pyplot as plt
 
 ############################################################################### 
 #############################   CONFIGURATION   ###############################
 ###############################################################################
 # Given data
-from generate import final as TSW
-from generate import evaporation as ET
-from generate import rain as R
-from generate import n, PredictYield
+from ml.generate import final as TSW
+from ml.generate import evaporation as ET
+from ml.generate import rain as R
+from ml.generate import n, PredictYield
 
 # PRICES
 WATER_PRICE = 100
@@ -116,7 +115,7 @@ def reward(i):
 ############################################################################### 
 def execute_episode():
     # reset the value of TSW
-    from generate import final as TSW
+    from ml.generate import final as TSW
     
     # SET s and a for the first time
     s = 0
@@ -150,23 +149,12 @@ def execute_episode():
 #######################   FINAL IRRIGATION AMOUNTS   ########################## 
 ###############################################################################
 def find_amounts():
+    reset_Q()
+    for _ in range(100):
+        execute_episode()
+
     final_actions = []
     for i in range(len(Q)-1): 
         final_actions.append(ACTIONS[np.argmax(Q[i])])
     
     return final_actions
-
-if __name__ == "__main__":
-    reset_Q()
-    print_Q()
-    
-    for _ in range(100):
-        execute_episode()
-
-    print_Q()
-    # print(ET)
-
-    plt.plot(TSW)
-    final_actions = find_amounts()
-    plt.plot(final_actions)
-    plt.show()
