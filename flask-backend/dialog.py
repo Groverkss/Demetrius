@@ -6,9 +6,9 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./secret.json"
 
 class DialogFlow:
     def __init__(self):
-        self.DIALOGFLOW_PROJECT_ID = "PROJECT_ID"
-        self.DIALOGFLOW_LANGUAGE_CODE = "en-US"
-        self.SESSION_ID = "SESSION_ID"
+        self.DIALOGFLOW_PROJECT_ID = os.environ["DIALOGFLOW_PROJECT_ID"];
+        self.DIALOGFLOW_LANGUAGE_CODE = "en-US";
+        self.SESSION_ID = os.environ["DIALOGFLOW_SESSION_ID"];
 
     def collect_intent(self, raw_query):
         session_client = dialogflow.SessionsClient()
