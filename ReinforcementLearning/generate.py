@@ -11,6 +11,8 @@ rain[71] = 3
 
 mois = [20]*n
 
+evaporation = []
+
 final = []
 init = 0
 for i,j in zip(rain, mois):
@@ -21,6 +23,7 @@ for i,j in zip(rain, mois):
     evap = 100/random.randrange(20,50)
     init = init/evap
     final.append(round(init,3))
+    evaporation.append(round(evap,3))
 
 def PredictYield(TSW):
     total_sum = sum(TSW)
@@ -32,4 +35,5 @@ def PredictYield(TSW):
         return 6000
 
 # print(final)
+# print(evaporation)
 # print(sum(final))
