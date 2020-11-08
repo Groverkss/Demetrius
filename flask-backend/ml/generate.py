@@ -25,15 +25,6 @@ for i,j in zip(rain, mois):
     final.append(round(init,3))
     evaporation.append(round(evap,3))
 
-def PredictYield(TSW):
-    total_sum = sum(TSW)
-    if total_sum < 600:
-        return total_sum*10
-    elif total_sum < 700:
-        return 7000
-    else:
-        return 6000
-
 # print(final)
 # print(evaporation)
 # print(sum(final))
