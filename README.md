@@ -52,4 +52,4 @@ it gets better! We convert each day into a datapoint, and the amount of irrigati
 
 ### Application
 
-TODO
+We have made a chatbot using IBM Watson, hosted on GCloud with a React frontend and Flask backend.
