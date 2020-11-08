@@ -12,9 +12,8 @@ def chat():
     input_query = req_data["input"]
    
     response = chatbot.talk(input_query)
-    pprint(response)
 
-    return "Testing"
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug=True)
