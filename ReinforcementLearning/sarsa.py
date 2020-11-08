@@ -5,8 +5,10 @@ import random
 #############################   CONFIGURATION   ###############################
 ###############################################################################
 # Given data
-from data import TSW, ET, R, n, PredictYield
-# from generate import final
+from generate import final as TSW
+from generate import evaporation as ET
+from generate import rain as R
+from generate import n, PredictYield
 
 # PRICES
 WATER_PRICE = 100
@@ -15,7 +17,6 @@ MAX_COSTS = 1000
 
 # AGRI CONSTANTS
 MAX_SOIL_WATER = 50
-I = []
 ACTIONS = [10, 20, 30, 40]
 
 # RL CONSTANTS
@@ -38,8 +39,8 @@ def predTSW(tsw, water, et, rain):
 def simulate(i, a):    
     I_i = irrigate(TSW[i]) 
     I.append(I_i)
-    TSW[i+1] = predTSW(TSW[i], I_i, ET[i], R[i])
-    return TSW[i+1]
+    # TSW[i+1] = predTSW(TSW[i], I_i, ET[i], R[i])
+    # return TSW[i+1]
 
 ############################################################################### 
 
@@ -53,7 +54,7 @@ def simulate(i, a):
 def reset_Q():
     global Q
     Q = []
-    for _ in range(int(n)):
+    for _ in range(n+1):
         temp = []
         for __ in range(len(ACTIONS)):
             temp.append(round(random.random(), 3))   
@@ -100,7 +101,6 @@ def reward(i):
     else:
         W = sum(I) * WATER_PRICE
         Y = PredictYield(TSW) * PRODUCT_PRICE
-
         NET_RETURN = Y - W
 
         r = -50 if MAX_COSTS < W else NET_RETURN
@@ -115,11 +115,19 @@ def reward(i):
 ############################################################################### 
 def execute_episode():
     # reset the value of TSW
-    from data import TSW
+    from generate import final as TSW
+    
     # SET s and a for the first time
     s = 0
     a = random.randint(0, len(ACTIONS)-1)
-    for i in range(1, n):
+
+    global I
+    I = []
+
+    for i in range(1, n+1):
+
+        simulate(s, a)
+
         new_s = i
         new_a = greedy(EPSILON, new_s)
 
@@ -133,15 +141,16 @@ def execute_episode():
         Q[s][a] = round(Q[s][a], 3)
 
         a = new_a
-        s = new_s 
+        s = new_s
+
 ############################################################################### 
 
 if __name__ == "__main__":
-    # Q FUNCTION WORKS
     reset_Q()
     print_Q()
     
-    for _ in range(50):
+    for _ in range(100):
         execute_episode()
 
     print_Q()
+    # print(ET)
