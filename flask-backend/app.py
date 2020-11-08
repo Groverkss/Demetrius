@@ -3,6 +3,7 @@ from pprint import pprint
 from ml.sarsa import find_amounts
 from ml.analysis import plan, tsw, rain
 from watson import Watson
+import json
 
 app = Flask(__name__)
 chatbot = Watson()
@@ -18,9 +19,12 @@ intents = {
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    if not data:
-        return "upload"
+    global data
 
+    if not data:
+        with open("ml/sample1.json") as sample:
+            data = json.load(sample)
+            
     req_data = request.get_json()
     input_query = req_data["input"]
 
@@ -33,10 +37,12 @@ def chat():
 
     if response["intent"] == "action_2395_intent_16387":
         rain(data)
-    else if response["intent"] == "action_11127_intent_1760":
+    elif response["intent"] == "action_11127_intent_1760":
         tsw(data)
     else:
-        plan(final_amounts(data))
+        with open("ml/sarsa1.json") as sample:
+            data2 = json.load(sample)
+            plan(data2)
 
     return jsonify(response)
 
