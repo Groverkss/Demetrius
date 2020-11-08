@@ -125,7 +125,7 @@ def reward(i):
 ############################################################################### 
 def execute_episode():
     # reset the value of TSW
-    from generate import final as TSW
+    from ml.generate import final as TSW
     
     # SET s and a for the first time
     s = 0
@@ -158,19 +158,18 @@ def execute_episode():
 ############################################################################### 
 #######################   FINAL IRRIGATION AMOUNTS   ########################## 
 ###############################################################################
-def find_amounts():
-    with open('sample1.json') as f:
-        value_dict = json.load(f)
+def find_amounts(data):
+    value_dict = data
 
-        global TSW
-        global ET
-        global R
-        global n
+    global TSW
+    global ET
+    global R
+    global n
 
-        TSW = value_dict['TSW']
-        ET = value_dict['ET']
-        R = value_dict['R']
-        n = value_dict['n']
+    TSW = value_dict['TSW']
+    ET = value_dict['ET']
+    R = value_dict['R']
+    n = value_dict['n']
 
     reset_Q()    
     for _ in range(100):
