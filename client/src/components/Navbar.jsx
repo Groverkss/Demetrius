@@ -5,7 +5,7 @@ export default () => {
     return (
         <Navbar light className="custom-bg-primary mb-2">
             <NavbarBrand href="/" className="font-weight-bold custom-fg-primary">
-                DSSE
+                Demetrius
             </NavbarBrand>
         </Navbar>
     );

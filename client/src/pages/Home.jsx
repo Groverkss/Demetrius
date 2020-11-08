@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, FormGroup, Input } from "reactstrap";
 import FadeIn from "react-fade-in";
 
 import Chat from "../components/Chat";
@@ -10,11 +10,26 @@ import ProductItem from "../components/ProductItem";
 export default () => {
     const [loading, setLoading] = useState(false);
     const [content, setContent] = useState([]);
+    const file = useState("");
+    
+    const onChangeHandler = event => {
+
+    }
 
     const renderContent = () => {
         if (loading) {
             return <Loading />;
-        } else if (content.length > 0) {
+        }
+        else if (content == "upload") {
+            return (
+                <div>
+                    <FormGroup>
+                        <Input type="file" name="file" id="exampleFile" />
+                    </FormGroup>
+                </div>
+            )
+        }
+        else if (content.length > 0) {
             return (
                 <Container fluid tag={FadeIn}>
                     <Row>

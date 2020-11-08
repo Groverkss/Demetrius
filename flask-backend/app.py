@@ -18,7 +18,7 @@ intents = {
 @app.route("/chat", methods=["POST"])
 def chat():
     if not data:
-    return ""
+        return ""
 
     req_data = request.get_json()
     input_query = req_data["input"]

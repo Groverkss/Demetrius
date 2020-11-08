@@ -18,7 +18,7 @@ class Watson:
     def talk(self, text):
         response = self.assistant.message_stateless(
             assistant_id=self.assistant_id,
-            input={"message_type": "text", "text": text},
+            input={"message_type": "text", "text": ""},
         ).get_result()
 
         return response
